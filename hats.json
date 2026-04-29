@@ -1,0 +1,44 @@
+[
+  {
+    "hat_name": "Enumerator",
+    "default_tier": "model-medium",
+    "escalation_tier": "model-large",
+    "confidence_threshold": 0.90,
+    "description": "Structured state loading and input enumeration. Critical-path hat — all downstream stages read this output. Medium tier ensures robust primitive extraction and irreducible identification; high confidence threshold prevents incomplete state from propagating downstream."
+  },
+  {
+    "hat_name": "Explorer",
+    "default_tier": "model-medium",
+    "escalation_tier": "model-large",
+    "confidence_threshold": 0.80,
+    "description": "Divergent association, domain bridging, and peripheral exploration. Medium tier produces meaningfully richer cross-domain analogies and activation maps than small tier; quality of conceptual connections here gates the breadth of S4/S5/S6."
+  },
+  {
+    "hat_name": "Simulator",
+    "default_tier": "model-medium",
+    "escalation_tier": "model-large",
+    "confidence_threshold": 0.80,
+    "description": "Exhaustive boundary and scenario analysis requiring consistent multi-step simulation. Medium-tier balances reasoning depth against cost."
+  },
+  {
+    "hat_name": "Precision",
+    "default_tier": "model-medium",
+    "escalation_tier": "model-large",
+    "confidence_threshold": 0.80,
+    "description": "Deep vocabulary stripping, specification work, and forward-chain construction. Medium-tier sufficient; escalates to large on incomplete output."
+  },
+  {
+    "hat_name": "Adversary",
+    "default_tier": "model-large",
+    "escalation_tier": null,
+    "confidence_threshold": 0.75,
+    "description": "Falsification, contradiction detection, and alternative hypothesis generation. Max-tier assignment is non-negotiable; this is where confirmation bias is caught or missed."
+  },
+  {
+    "hat_name": "Synthesizer",
+    "default_tier": "model-medium",
+    "escalation_tier": "model-large",
+    "confidence_threshold": 0.80,
+    "description": "Integration, distillation, and V1-V7 verification over accumulated pipeline output. Medium tier required — S7 runs a 7-check verification battery over all preceding stages, and OSP synthesizes 6+ stage outputs into the final user-facing report. Context management and integration reasoning quality matter here."
+  }
+]

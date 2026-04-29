@@ -1,0 +1,330 @@
+{
+  "version": "1.0.0",
+  "kb_base": "~/.claude/skills/epiphany-cogenius/kb/",
+  "session_output_base": "~/docs/epiphany/cogenius/",
+  "mode_shift_after": {
+    "MINIMAL": "S1",
+    "STANDARD": "S3",
+    "DEEP": "S4",
+    "CONJECTURE": "S1"
+  },
+  "stages": [
+    {
+      "stage_id": "S1",
+      "stage_name": "State Loading",
+      "hat": "Enumerator",
+      "module_file": "modules/S1-state-loading.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["MINIMAL", "STANDARD", "DEEP"],
+      "wave": 1,
+      "phase": "ideation",
+      "activation": ["always"],
+      "kb_sources": ["input-preloading-templates.md"],
+      "input_dependencies": ["stages/00-processed-input.md"],
+      "output_file": "stages/S1-state-loading.md",
+      "xml_element": "state_loading",
+      "context_budget_lines": 800,
+      "required_output_sections": [
+        "Input class",
+        "Primitives",
+        "Simplicity-stripped irreducibles",
+        "Tesla measurement plan",
+        "Verification"
+      ]
+    },
+    {
+      "stage_id": "S2",
+      "stage_name": "Constraint Escape",
+      "hat": "Explorer",
+      "module_file": "modules/S2-constraint-escape.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["STANDARD", "DEEP"],
+      "wave": 2,
+      "phase": "ideation",
+      "activation": ["always"],
+      "kb_sources": [
+        "domain-catalog.md",
+        "blend-template.md",
+        "debono-techniques.md"
+      ],
+      "input_dependencies": ["stages/00-processed-input.md"],
+      "output_file": "stages/S2-constraint-escape.md",
+      "xml_element": "constraint_escape",
+      "context_budget_lines": 1200,
+      "required_output_sections": [
+        "Named constraint",
+        "Domain candidates surveyed",
+        "Domain mappings (5)",
+        "Activation provenance",
+        "Constraint-escape path"
+      ]
+    },
+    {
+      "stage_id": "S3",
+      "stage_name": "Peripheral Exploration",
+      "hat": "Explorer",
+      "module_file": "modules/S3-peripheral-exploration.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["STANDARD", "DEEP"],
+      "wave": 2,
+      "phase": "ideation",
+      "activation": ["always"],
+      "kb_sources": ["spreading-activation.md", "elegance-rubric.md"],
+      "input_dependencies": ["stages/00-processed-input.md"],
+      "output_file": "stages/S3-peripheral-exploration.md",
+      "xml_element": "peripheral_exploration",
+      "context_budget_lines": 1000,
+      "required_output_sections": [
+        "Activation map",
+        "Convergent nodes",
+        "Selected illuminations",
+        "Verification"
+      ],
+      "raises_signals": ["S3_thin_or_empty"]
+    },
+    {
+      "stage_id": "S4",
+      "stage_name": "Dynamic Simulation",
+      "hat": "Simulator",
+      "module_file": "modules/S4-dynamic-simulation.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["DEEP"],
+      "wave": 3,
+      "phase": "ideation",
+      "activation": ["scale:DEEP"],
+      "kb_sources": ["observer-frames.md", "simulation-checklist.md"],
+      "input_dependencies": [
+        "stages/S1-state-loading.md",
+        "stages/00-processed-input.md"
+      ],
+      "output_file": "stages/S4-dynamic-simulation.md",
+      "xml_element": "dynamic_simulation",
+      "context_budget_lines": 900,
+      "required_output_sections": [
+        "System model",
+        "Observer frame analyses",
+        "Imbalances",
+        "Singularities",
+        "Limit cases",
+        "Theory collisions"
+      ]
+    },
+    {
+      "stage_id": "S5",
+      "stage_name": "Precision Forcing",
+      "hat": "Precision",
+      "module_file": "modules/S5-precision-forcing.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["MINIMAL", "STANDARD", "DEEP"],
+      "wave": 4,
+      "phase": "synthesis",
+      "activation": ["always"],
+      "kb_sources": ["vocabulary-rubric.md", "forward-chain-template.md"],
+      "input_dependencies": [
+        "stages/00-processed-input.md",
+        "stages/S1-state-loading.md"
+      ],
+      "output_file": "stages/S5-precision-forcing.md",
+      "xml_element": "precision_forcing",
+      "context_budget_lines": 1100,
+      "required_output_sections": [
+        "5-level vocabulary stripping",
+        "3-representation rendering",
+        "Constructive specification",
+        "Flagged vague claims",
+        "Forward-chain consequence tree"
+      ]
+    },
+    {
+      "stage_id": "S6",
+      "stage_name": "Falsification Engine",
+      "hat": "Adversary",
+      "module_file": "modules/S6-falsification.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["STANDARD", "DEEP"],
+      "wave": 4,
+      "phase": "synthesis",
+      "activation": ["always"],
+      "kb_sources": ["tot-templates.md", "falsification-checklists.md"],
+      "input_dependencies": [
+        "stages/S3-peripheral-exploration.md",
+        "stages/00-processed-input.md",
+        "stages/S1-state-loading.md"
+      ],
+      "output_file": "stages/S6-falsification.md",
+      "xml_element": "falsification",
+      "context_budget_lines": 1500,
+      "required_output_sections": [
+        "Abductive mode results",
+        "Deductive mode results",
+        "Inductive mode results",
+        "Consolidated hypotheses",
+        "Extreme scenarios",
+        "Millikan assessment",
+        "Density report"
+      ],
+      "optional_dependencies": [
+        "stages/S3-1-defixation.md"
+      ],
+      "raises_signals": ["S6_no_alternatives"]
+    },
+    {
+      "stage_id": "S7",
+      "stage_name": "Integration & Verification",
+      "hat": "Synthesizer",
+      "module_file": "modules/S7-integration-verification.md",
+      "module_version": "1.1.0",
+      "type": "core",
+      "scale_gates": ["MINIMAL", "STANDARD", "DEEP"],
+      "wave": 5,
+      "phase": "synthesis",
+      "activation": ["always"],
+      "kb_sources": [
+        "verification-gates.md",
+        "boden-types.md",
+        "scope-template.md",
+        "representation-frames.md",
+        "elegance-rubric.md"
+      ],
+      "input_dependencies": [
+        "stages/00-processed-input.md",
+        "stages/S1-state-loading.md"
+      ],
+      "optional_dependencies": [
+        "stages/S5-precision-forcing.md",
+        "stages/S2-constraint-escape.md",
+        "stages/S3-peripheral-exploration.md",
+        "stages/S3-1-defixation.md",
+        "stages/S4-dynamic-simulation.md",
+        "stages/S6-falsification.md",
+        "stages/S6-1-conjecture.md"
+      ],
+      "output_file": "stages/S7-integration.md",
+      "xml_element": "integration",
+      "context_budget_lines": 1500,
+      "required_output_sections": [
+        "Convergence signals",
+        "Primary conclusion",
+        "Confidence band",
+        "Creativity type",
+        "Generalization check",
+        "Verification report (V1-V7)"
+      ]
+    }
+  ],
+  "conditional_modules": [
+    {
+      "stage_id": "S3.1",
+      "stage_name": "Representational Change (de-fixation)",
+      "hat": "Explorer",
+      "module_file": "modules/S3-1-defixation.md",
+      "module_version": "1.1.0",
+      "type": "conditional",
+      "scale_gates": ["STANDARD", "DEEP"],
+      "wave": "Nb",
+      "phase": "ideation",
+      "activation": [
+        "condition:S3_thin_or_empty",
+        "condition:S6_no_alternatives"
+      ],
+      "kb_sources": ["ohlsson-defixation.md"],
+      "input_dependencies": [
+        "stages/S3-peripheral-exploration.md",
+        "stages/00-processed-input.md"
+      ],
+      "output_file": "stages/S3-1-defixation.md",
+      "xml_element": "representational_change",
+      "context_budget_lines": 700,
+      "required_output_sections": [
+        "Constraint relaxations",
+        "Chunk decompositions",
+        "Re-encodings",
+        "Selected breakthrough candidate",
+        "Residual fixation signals"
+      ]
+    },
+    {
+      "stage_id": "S6.1",
+      "stage_name": "Conjecture (Ramanujan pattern→conjecture)",
+      "hat": "Explorer",
+      "module_file": "modules/S6-1-conjecture.md",
+      "module_version": "1.1.0",
+      "type": "conditional",
+      "scale_gates": ["MINIMAL", "STANDARD", "DEEP"],
+      "wave": 2,
+      "phase": "synthesis",
+      "activation": ["flag:--conjecture"],
+      "kb_sources": ["pattern-taxonomy.md"],
+      "input_dependencies": [
+        "stages/S1-state-loading.md",
+        "stages/00-processed-input.md"
+      ],
+      "output_file": "stages/S6-1-conjecture.md",
+      "xml_element": "conjecture",
+      "context_budget_lines": 900,
+      "required_output_sections": [
+        "Detected patterns",
+        "Conjectures (≥3)",
+        "Verification instances"
+      ]
+    }
+  ],
+  "output_synthesis_pass": {
+    "hat": "Synthesizer",
+    "module_file": "modules/output-synthesis-pass.md",
+    "enabled_when": "NOT --xml",
+    "required_output_sections": [
+      "Pipeline Status Header",
+      "Headline Insight",
+      "Theory Collisions",
+      "Discovery vs. Proof",
+      "Independence-Verified Bridges",
+      "Alternative Hypotheses",
+      "Density-Checked Falsification",
+      "Scope Limits",
+      "Coherence Signals",
+      "Generalization Checks",
+      "Open Questions & Next Probes"
+    ],
+    "input_dependencies": [
+      "stages/S7-integration.md",
+      "stages/S7-v6-scope.txt",
+      "stages/S1-state-loading.md",
+      "stages/S5-precision-forcing.md",
+      "stages/00-processed-input.md"
+    ],
+    "optional_dependencies": [
+      "stages/S2-constraint-escape.md",
+      "stages/S3-peripheral-exploration.md",
+      "stages/S3-1-defixation.md",
+      "stages/S4-dynamic-simulation.md",
+      "stages/S6-falsification.md",
+      "stages/S6-1-conjecture.md"
+    ],
+    "output_file": "stages/output-distilled.md"
+  },
+  "signals": {
+    "S3_thin_or_empty": {
+      "raised_by": "S3",
+      "activates": ["S3.1"]
+    },
+    "S6_no_alternatives": {
+      "raised_by": "S6",
+      "activates": ["S3.1"],
+      "triggers_retry": true,
+      "deferred_to_step": 6,
+      "activation_note": "NOT evaluated in STEP 5 inline activation. Deferred to STEP 6 Path B. S3.1 + S6 + S7 are re-run in sequence after S7 completes."
+    }
+  },
+  "scale_auto_detection": {
+    "MINIMAL": "input_length < 300 AND no_code AND no_technical_terms",
+    "STANDARD": "input_length BETWEEN 300 AND 5000 OR code_or_technical_content",
+    "DEEP": "input_length > 5000 OR multi_section_spec OR flag:--deep"
+  }
+}
